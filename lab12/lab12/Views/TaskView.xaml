@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="lab12.Views.TaskView"
+             xmlns:local="clr-namespace:lab12.ViewModel">
+
+    <ContentPage.BindingContext>
+        <local:TaskViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout Padding="20" Spacing="10" BackgroundColor="#f0f0f0">
+            <Frame BorderColor="DeepPink" CornerRadius="10" HasShadow="True" BackgroundColor="White" Padding="10">
+                <Label Text="Task Details" FontSize="Large" TextColor="DeepPink" HorizontalOptions="CenterAndExpand"/>
+            </Frame>
+
+            <Label Text="Title" FontSize="Medium" TextColor="DeepPink"/>
+            <Entry Text="{Binding Title}" Placeholder="Enter Title" BackgroundColor="#e0e0e0" />
+
+            <Label Text="Description" FontSize="Medium" TextColor="DeepPink"/>
+            <Editor HeightRequest="100" Text="{Binding Description}" Placeholder="Enter Description" BackgroundColor="#e0e0e0" AutoSize="TextChanges"/>
+
+            <StackLayout Orientation="Horizontal" Spacing="20">
+                <Label Text="Status" FontSize="Medium" TextColor="DeepPink" VerticalOptions="CenterAndExpand"/>
+                <Switch IsToggled="{Binding Status}" ThumbColor="DeepPink" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="20" Spacing="10">
+                <Button FontSize="Medium" Text="Save" Command="{Binding Save}" BackgroundColor="DeepPink" TextColor="White"/>
+                <Button FontSize="Medium" Text="List" Command="{Binding Get}" BackgroundColor="DeepPink" TextColor="White"/>
+            </StackLayout>
+
+            <Frame BorderColor="DeepPink" CornerRadius="10" HasShadow="True" BackgroundColor="White" Padding="10" Margin="0,10,0,0">
+                <Label Text="Task List" FontSize="Large" TextColor="DeepPink" HorizontalOptions="CenterAndExpand"/>
+            </Frame>
+
+            <ListView VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" ItemsSource="{Binding Tasks}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame BorderColor="#dddddd" CornerRadius="5" HasShadow="True" Margin="0,0,0,10" BackgroundColor="White">
+                                <StackLayout Padding="10">
+                                    <Label Text="{Binding Title}" FontSize="Medium" TextColor="DeepPink" />
+                                    <StackLayout Orientation="Horizontal" Spacing="20">
+                                        <Label Text="{Binding Description}" HorizontalOptions="StartAndExpand" />
+                                        <Switch IsToggled="{Binding Status}" ThumbColor="DeepPink" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
